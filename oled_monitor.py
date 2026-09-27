@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
+# ==============================================================================
+#  OLED Monitor for OpenWrt (Dell DW5821e / ModemManager)
+#  Optimized & Customized by: DEJEDE (085236578999 - Photo & Video Services)
+# ==============================================================================
 OLED Monitor v6 untuk OpenWrt - SSD1306 128x64 (Auto Operator Real & Anti-Freeze)
-
 Layout:
   [kuning] bar sinyal + persentase (%) + nama operator asli
   [biru]   kecepatan upload/download + panah animasi
@@ -29,7 +32,7 @@ LOCK_PATH = "/var/run/oled_monitor.lock"
 LOG_PATH = "/var/log/oled_monitor.log"
 
 MARQUEE_TEXT = ">> DEJEDE : 085236578999 - PHOTO & VIDEO SERVICES <<         "
-MARQUEE_SPEED = 100    
+MARQUEE_SPEED = 40    # Ubah dari 100 menjadi 40 (atau 30 jika ingin lebih lambat lagi)
 BOUNCE_HZ = 0.04       
 
 TARGET_FRAME_TIME = 0.05    
@@ -201,7 +204,7 @@ def measure_text_width(text):
 
 
 def main():
-    log.info("OLED Monitor v6 mulai berjalan...")
+    log.info("DEJEDE OLED Monitor v6 mulai berjalan...")
     device.clear()
 
     net = NetMonitor(iface="wwan0")
