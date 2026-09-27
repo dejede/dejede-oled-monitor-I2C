@@ -6,26 +6,27 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Status](https://img.shields.io/badge/status-stable-brightgreen)
 
-> Utilitas monitoring koneksi internet *real-time* dengan animasi visual dinamis untuk **Orange Pi Zero 3** ber-OS **OpenWrt**, menggunakan layar **LCD OLED 0.96" I2C (128x64)** dan integrasi modem seluler **Dell DW** (QMI/MBIM).
+> Utilitas monitoring koneksi internet seluler *real-time* dengan animasi visual dinamis untuk router **OpenWrt** Anda, menggunakan layar **LCD OLED 0.96" I2C (128x64)** dan integrasi modem **Dell DW5821e (ModemManager)**.
 
 ---
 
 ## 📌 Fitur Utama
-* **Top Bar (Informasi Seluler):** Menampilkan indikator bar sinyal dinamis, nama operator seluler, dan band frekuensi aktif dari modem Dell DW.
-* **Middle Section (Grafik & Latency):** Menampilkan grafik equalizer/gelombang trafik yang bergerak naik-turun secara *real-time* berdasarkan fluktuasi ping internet.
-* **Footer Section (Uptime & IP Publik):** Menghitung durasi koneksi aktif (*uptime*) secara kontinu serta menampilkan IP Publik global secara berkala.
+* **Top Bar (Informasi Seluler):** Menampilkan indikator bar sinyal dinamis, persentase kualitas sinyal akurat, dan nama operator seluler asli (diambil langsung via `mmcli`).
+* **Middle Section (Trafik Jaringan):** Menampilkan kecepatan *Upload* (UP) dan *Download* (DWN) secara *real-time* lengkap dengan panah animasi naik-turun.
+* **Footer Section (Marquee Text):** Teks berjalan yang dapat dikustomisasi untuk menampilkan informasi personal atau layanan.
+* **Anti-Freeze & Error Transparency:** Dilengkapi proteksi waktu tunggu (*timeout*) 0.4 detik dan penanganan error transparan (seperti `TIMEOUT`, `MMCLI ERROR`, atau `NO SERVICE`) tanpa data palsu.
 
 ---
 
 ## 🛠️ Kebutuhan Hardware & Wiring
 
-* **Orange Pi Zero 3** (Running OpenWrt)
+* **Router OpenWrt**
+* **Modem Dell DW5821e (Snapdragon X20 LTE)**
 * **LCD OLED 0.96" I2C** (Resolusi 128x64, Controller SSD1306)
-* **Modem Dell DW** (Terkonfigurasi via QMI/MBIM)
 * Kabel Jumper (Female-to-Female)
 
 ### Skema Wiring Pin (I2C)
-| Pin OLED | Pin Orange Pi Zero 3 |
+| Pin OLED | Pin Router / Board |
 | :--- | :--- |
 | **VCC** | 3.3V |
 | **GND** | Ground (GND) |
@@ -40,20 +41,20 @@
 Masuk ke terminal OpenWrt Anda melalui SSH, lalu jalankan perintah berikut:
 ```bash
 opkg update
-opkg install kmod-i2c-core kmod-i2c-gpio python3 python3-light python3-pip uqmi
+opkg install kmod-i2c-core kmod-i2c-gpio python3 python3-light python3-pip
 
 2. Install Library Python (luma.oled)
 Instal dependensi dan library grafis OLED menggunakan pip3:
 
 Bash
-opkg install python3-codecs python3-openssl
+opkg install python3-codecs python3-openssl python3-pillow python3-smbus i2c-tools
 pip3 install luma.oled
 3. Deploy Script Monitoring
 Buat file script baru di direktori /root/:
 
 Bash
 nano /root/oled_monitor.py
-(Salin kode program dari file oled_monitor.py ke dalam editor, lalu simpan dengan menekan Ctrl+O, Enter, lalu keluar menggunakan Ctrl+X).
+(Salin kode program oled_monitor.py ke dalam editor, lalu simpan dengan menekan Ctrl+O, Enter, lalu keluar menggunakan Ctrl+X).
 
 4. Uji Coba Manual
 Pastikan script berjalan dengan baik tanpa error di terminal:
@@ -63,7 +64,7 @@ python3 /root/oled_monitor.py
 (Tekan Ctrl+C untuk keluar dari mode uji coba).
 
 5. Konfigurasi Auto-Start (Daemon init.d)
-Agar script berjalan otomatis di latar belakang saat Orange Pi Zero 3 melakukan booting:
+Agar script berjalan otomatis di latar belakang saat router melakukan booting:
 
 Buat file service init.d:
 
@@ -93,3 +94,5 @@ chmod +x /etc/init.d/oled_monitor
 
 📜 Lisensi
 Proyek ini bersifat open-source dan bebas untuk dikembangkan kembali sesuai kebutuhan Anda.
+
+Modified by DEJEDE | Photo & Video Services (+62 852-3657-8999)
