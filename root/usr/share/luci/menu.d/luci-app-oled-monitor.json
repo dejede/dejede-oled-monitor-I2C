@@ -1,0 +1,14 @@
+{
+	"admin/services/oled_monitor": {
+		"title": "Dejede OLEDMON",
+		"order": 60,
+		"action": {
+			"type": "view",
+			"path": "oled_monitor/settings"
+		},
+		"depends": {
+			"acl": [ "luci-app-oled-monitor" ],
+			"uci": { "oled_monitor": true }
+		}
+	}
+}
