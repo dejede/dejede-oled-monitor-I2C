@@ -1,4 +1,4 @@
-# 🚀 dejede-oled-monitor
+# 🚀 dejede-oled-monitor-I2C
 
 [![Dejede Badge](https://img.shields.io/badge/DEJEDE_%7C_%2B6285236578999-5C765D?style=flat&logo=whatsapp&logoColor=white&labelColor=3F4F40)](https://wa.me/6285236578999)
 ![OpenWrt](https://img.shields.io/badge/OpenWrt-23.x%20--%2025.x-1b4b34?logo=openwrt&logoColor=white)
