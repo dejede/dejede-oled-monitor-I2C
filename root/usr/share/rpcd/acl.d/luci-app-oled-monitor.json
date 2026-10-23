@@ -1,0 +1,18 @@
+{
+	"luci-app-oled-monitor": {
+		"description": "Akses pengaturan Dejede OLEDMON",
+		"read": {
+			"uci": [ "oled_monitor" ],
+			"file": {
+				"/etc/init.d/oled_monitor": [ "exec" ],
+				"/var/log/oled_monitor.log": [ "read" ]
+			}
+		},
+		"write": {
+			"uci": [ "oled_monitor" ],
+			"file": {
+				"/etc/init.d/oled_monitor": [ "exec" ]
+			}
+		}
+	}
+}
